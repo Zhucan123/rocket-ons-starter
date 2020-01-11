@@ -10,7 +10,7 @@
     </parent>
     <groupId>io.gitee.zhucan123</groupId>
     <artifactId>rocket-ons-spring-boot-starter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <name>rocket-ons-spring-boot-starter</name>
     <description>Demo project for Spring Boot</description>
 
@@ -157,10 +157,10 @@
         </repository>
     </distributionManagement>
     <scm>
-        <connection>scm:git@gitee.com:zhucan123/framework.git</connection>
-        <developerConnection>scm:git@gitee.com:zhucan123/framework.git</developerConnection>
-        <url>git@gitee.com:zhucan123/framework.git</url>
-        <tag>zc-framework-1.0.1</tag>
+        <connection>scm:git@gitee.com:zhucan123/rocketONS-starter.git</connection>
+        <developerConnection>scm:git@gitee.com:zhucan123/rocketONS-starter.git</developerConnection>
+        <url>git@gitee.com:zhucan123/rocketONS-starter.git</url>
+        <tag>zc-rocket-ons-1.0.1</tag>
     </scm>
 
 </project>
