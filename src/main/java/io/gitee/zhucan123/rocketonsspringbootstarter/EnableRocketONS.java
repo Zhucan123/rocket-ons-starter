@@ -1,6 +1,5 @@
-package io.gitee.zhucan123.rocketonsspringbootstarter.consumer;
+package io.gitee.zhucan123.rocketonsspringbootstarter;
 
-import io.gitee.zhucan123.rocketonsspringbootstarter.RocketAutoConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
