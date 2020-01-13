@@ -3,6 +3,7 @@ package io.gitee.zhucan123.rocketonsspringbootstarter;
 import com.aliyun.openservices.ons.api.PropertyKeyConst;
 import com.aliyun.openservices.ons.api.PropertyValueConst;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.Properties;
 
@@ -11,6 +12,7 @@ import java.util.Properties;
  * @date: 2019/10/30 16:38
  * @description: rocket 基础配置属性
  */
+@Configuration
 @ConfigurationProperties(prefix = "rocket")
 public class RocketConfiguration {
 
