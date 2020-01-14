@@ -89,6 +89,15 @@ public abstract class DefaultProducerProxy implements TopicManager {
     return producer.send(message);
   }
 
+  /**
+   * 默认使用基础配置文件中的 topic
+   *
+   * @return
+   */
+  @Override
+  public String getTopic() {
+    return configuration.getTopic();
+  }
 
   protected byte[] toByte(Object o) {
     return JSONObject.toJSONString(o).getBytes();

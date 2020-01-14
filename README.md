@@ -22,6 +22,7 @@
 #### 使用说明
 
 ###### 1. 项目配置
+
 ```text
 rocket:
   address: http://xxxx
@@ -34,6 +35,7 @@ rocket:
 
 
 ###### 2. consumer的使用示例代码
+
 ```java
 @Component
 @ConsumerListener(tags = "msg_tag", consumers = 2)
@@ -72,7 +74,8 @@ public class ExampleConsumerListener implements RocketListener<MessageData> {
  * consume 为消费业务逻辑处理方法
  
  
- ###### 3. 生产者的使用
+###### 3. 生产者的使用
+
 ```java
 @Component
 public class ExampleProducer extends DefaultProducerProxy {
