@@ -1,9 +1,9 @@
-package io.gitee.zhucan123.rocketonsspringbootstarter.consumer;
+package io.gitee.zhucan123.ons.consumer;
 
 import com.aliyun.openservices.ons.api.Action;
 import com.aliyun.openservices.ons.api.ConsumeContext;
 import com.aliyun.openservices.ons.api.Message;
-import io.gitee.zhucan123.rocketonsspringbootstarter.MessageData;
+import io.gitee.zhucan123.ons.MessageData;
 import org.springframework.stereotype.Component;
 
 /**

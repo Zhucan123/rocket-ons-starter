@@ -1,4 +1,4 @@
-package io.gitee.zhucan123.rocketonsspringbootstarter.producer;
+package io.gitee.zhucan123.ons.producer;
 
 import org.springframework.stereotype.Component;
 

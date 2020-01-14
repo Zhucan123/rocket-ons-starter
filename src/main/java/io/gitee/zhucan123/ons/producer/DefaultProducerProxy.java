@@ -1,10 +1,10 @@
-package io.gitee.zhucan123.rocketonsspringbootstarter.producer;
+package io.gitee.zhucan123.ons.producer;
 
 import com.aliyun.openservices.ons.api.*;
 import com.aliyun.openservices.shade.com.alibaba.fastjson.JSONObject;
-import io.gitee.zhucan123.rocketonsspringbootstarter.MessageData;
-import io.gitee.zhucan123.rocketonsspringbootstarter.RocketConfiguration;
-import io.gitee.zhucan123.rocketonsspringbootstarter.TopicManager;
+import io.gitee.zhucan123.ons.MessageData;
+import io.gitee.zhucan123.ons.RocketConfiguration;
+import io.gitee.zhucan123.ons.TopicManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

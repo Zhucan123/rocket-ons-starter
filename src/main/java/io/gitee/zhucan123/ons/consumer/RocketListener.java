@@ -1,4 +1,4 @@
-package io.gitee.zhucan123.rocketonsspringbootstarter.consumer;
+package io.gitee.zhucan123.ons.consumer;
 
 import com.aliyun.openservices.ons.api.Action;
 import com.aliyun.openservices.ons.api.ConsumeContext;
@@ -7,8 +7,8 @@ import com.aliyun.openservices.ons.api.MessageListener;
 import com.aliyun.openservices.shade.com.alibaba.fastjson.JSONObject;
 import com.aliyun.openservices.shade.com.alibaba.fastjson.TypeReference;
 import com.aliyun.openservices.shade.com.alibaba.fastjson.parser.Feature;
-import io.gitee.zhucan123.rocketonsspringbootstarter.MessageData;
-import io.gitee.zhucan123.rocketonsspringbootstarter.TopicManager;
+import io.gitee.zhucan123.ons.MessageData;
+import io.gitee.zhucan123.ons.TopicManager;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

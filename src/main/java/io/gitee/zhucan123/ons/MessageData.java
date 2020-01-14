@@ -1,4 +1,4 @@
-package io.gitee.zhucan123.rocketonsspringbootstarter;
+package io.gitee.zhucan123.ons;
 
 /**
  * @author: zhuCan

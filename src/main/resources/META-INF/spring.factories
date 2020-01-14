@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.gitee.zhucan123.rocketonsspringbootstarter.RocketAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.gitee.zhucan123.ons.RocketAutoConfiguration

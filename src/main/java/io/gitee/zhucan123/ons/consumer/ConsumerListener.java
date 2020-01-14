@@ -1,4 +1,4 @@
-package io.gitee.zhucan123.rocketonsspringbootstarter.consumer;
+package io.gitee.zhucan123.ons.consumer;
 
 import java.lang.annotation.*;
 

@@ -1,15 +1,15 @@
-package io.gitee.zhucan123.rocketonsspringbootstarter;
+package io.gitee.zhucan123.ons;
 
 import com.aliyun.openservices.ons.api.Consumer;
 import com.aliyun.openservices.ons.api.ONSFactory;
 import com.aliyun.openservices.ons.api.PropertyKeyConst;
-import io.gitee.zhucan123.rocketonsspringbootstarter.consumer.ConsumerListener;
-import io.gitee.zhucan123.rocketonsspringbootstarter.consumer.RocketListener;
+import io.gitee.zhucan123.ons.consumer.ConsumerListener;
+import io.gitee.zhucan123.ons.consumer.RocketListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -20,19 +20,16 @@ import java.util.*;
  * -.-
  * created by zhuCan
  */
-@Component
 public class ConsumerAutoRegister {
 
-  private final RocketConfiguration configuration;
+  @Autowired
+  private RocketConfiguration configuration;
 
-  private final ApplicationContext applicationContext;
+  @Autowired
+  private ApplicationContext applicationContext;
 
   protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-  public ConsumerAutoRegister(RocketConfiguration configuration, ApplicationContext applicationContext) {
-    this.configuration = configuration;
-    this.applicationContext = applicationContext;
-  }
 
   /**
    * 用来注册consumer的
