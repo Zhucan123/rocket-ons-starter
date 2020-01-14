@@ -11,6 +11,16 @@ import org.springframework.stereotype.Component;
  * @date: 2020/1/10 18:03
  * @description:
  */
+
+/**
+ * @Component 注册成一个bean
+ * @ConsumerListener 标识是一个ons的消息消费者监听器
+ * 1. tags:接受带有相关tag的消息
+ * 2. consumers启动的实例数量
+ * <p>
+ * MessageData 为消息体类型class
+ * consume 为消费业务逻辑
+ */
 @Component
 @ConsumerListener(tags = "msg_tag", consumers = 2)
 public class ExampleConsumerListener implements RocketListener<MessageData> {
