@@ -1,5 +1,8 @@
 package io.gitee.zhucan123.ons.consumer;
 
+import com.aliyun.openservices.ons.api.PropertyValueConst;
+import org.springframework.stereotype.Component;
+
 import java.lang.annotation.*;
 
 /**
@@ -8,22 +11,35 @@ import java.lang.annotation.*;
  * @description: 需要注册到rocket 的消费者标记
  */
 @Documented
+@Component
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConsumerListener {
 
-  /**
-   * consumer 注册的 接受消息的过滤tag
-   *
-   * @return
-   */
-  String[] tags();
+    /**
+     * consumer 注册的 接受消息的过滤tag
+     *
+     * @return
+     */
+    String[] tags();
+
+    /**
+     * consumer 启动的实例数
+     *
+     * @return
+     */
+    int consumers() default 1;
 
   /**
-   * consumer 启动的实例数
+   * 容器名
    *
    * @return
    */
-  int consumers() default 1;
+  String value() default "";
+
+  /**
+   * 消费模式
+   */
+  String pattern() default PropertyValueConst.CLUSTERING;
 
 }

@@ -10,7 +10,7 @@
     </parent>
     <groupId>io.gitee.zhucan123</groupId>
     <artifactId>rocket-ons-spring-boot-starter</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>rocket-ons-spring-boot-starter</name>
     <description>Demo project for Spring Boot</description>
 

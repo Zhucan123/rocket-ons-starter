@@ -4,7 +4,8 @@ import com.aliyun.openservices.ons.api.Action;
 import com.aliyun.openservices.ons.api.ConsumeContext;
 import com.aliyun.openservices.ons.api.Message;
 import io.gitee.zhucan123.ons.MessageData;
-import org.springframework.stereotype.Component;
+import io.gitee.zhucan123.ons.OnsConfiguration;
+
 
 /**
  * @author: zhuCan
@@ -21,24 +22,9 @@ import org.springframework.stereotype.Component;
  * MessageData 为消息体类型class
  * consume 为消费业务逻辑
  */
-@Component
 @ConsumerListener(tags = "msg_tag", consumers = 2)
+@OnsConfiguration(topic = "topic-example", group = "group-example")
 public class ExampleConsumerListener implements RocketListener<MessageData> {
-
-  @Override
-  public String getTopic() {
-    return "topic-example";
-  }
-
-  @Override
-  public String getGroup() {
-    return "group-example";
-  }
-
-  @Override
-  public Boolean getEnable() {
-    return true;
-  }
 
   @Override
   public Action consume(Message message, MessageData messageBody, ConsumeContext consumeContext) {

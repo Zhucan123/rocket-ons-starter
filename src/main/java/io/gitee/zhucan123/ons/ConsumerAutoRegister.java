@@ -15,18 +15,21 @@ import javax.annotation.PostConstruct;
 import java.util.*;
 
 /**
- * generator for rocket mq !
- * This codes are generated automatically. Do not modify!
- * -.-
- * created by zhuCan
+ * @author: zhuCan
+ * @date: 2020/4/19 19:41
+ * @description: rocket 的消费者自动注册
+ * 使用容器工厂扫描所有consumer, 并根据注解配置属性 subscribe到相应的队列
  */
 public class ConsumerAutoRegister {
 
   @Autowired
-  private RocketConfiguration configuration;
+  private RocketProperties configuration;
 
   @Autowired
   private ApplicationContext applicationContext;
+
+  @Autowired
+  private PropertyResolver propertyResolver;
 
   protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -40,15 +43,17 @@ public class ConsumerAutoRegister {
     String[] beanNamesForAnnotation = applicationContext.getBeanNamesForAnnotation(ConsumerListener.class);
 
 
-    List<RocketListener> rocketListeners = new ArrayList<>();
+    List<RocketListener<?>> rocketListeners = new ArrayList<>();
 
     Arrays.stream(beanNamesForAnnotation)
-        .map(x -> (RocketListener) autowireCapableBeanFactory.getBean(x))
-        .filter(TopicManager::getEnable)
+        .map(x -> (RocketListener<?>) autowireCapableBeanFactory.getBean(x))
         .forEach(x -> {
-          int consumers = x.getClass().getAnnotation(ConsumerListener.class).consumers();
-          for (int i = 0; i < consumers; i++) {
-            rocketListeners.add(x);
+          ConsumerListener consumerListener = x.getClass().getAnnotation(ConsumerListener.class);
+          OnsConfiguration config = x.getClass().getAnnotation(OnsConfiguration.class);
+          if ("on".equalsIgnoreCase(config.enable())) {
+            for (int i = 0; i < consumerListener.consumers(); i++) {
+              rocketListeners.add(x);
+            }
           }
         });
 
@@ -69,21 +74,24 @@ public class ConsumerAutoRegister {
    *
    * @param listener
    */
-  private void listenerRegister(RocketListener... listener) {
+  private void listenerRegister(RocketListener<?>... listener) {
     Arrays.stream(listener).forEach(x -> {
       // 是否开启注册
       Properties properties = configuration.rocketProperties();
       // 获取注册注解
       ConsumerListener consumerListener = x.getClass().getAnnotation(ConsumerListener.class);
-      properties.put(PropertyKeyConst.GROUP_ID, x.getGroup());
+      OnsConfiguration config = x.getClass().getAnnotation(OnsConfiguration.class);
+      properties.put(PropertyKeyConst.GROUP_ID, propertyResolver.springElResolver(config.group()));
+      properties.put(PropertyKeyConst.MessageModel, propertyResolver.springElResolver(consumerListener.pattern()));
       Consumer consumer = ONSFactory.createConsumer(properties);
-      // 注册消费者监听器;
-      consumer.subscribe(x.getTopic(), String.join("||", consumerListener.tags()), x);
-      // 启动消费者;
+      // 注册消费者监听器
+      consumer.subscribe(propertyResolver.springElResolver(config.topic()), String.join("||", consumerListener.tags()), x);
+      // 启动消费者
       logger.info("启动消费者: {}", properties.get(PropertyKeyConst.GROUP_ID));
       consumer.start();
 
     });
 
   }
+
 }

@@ -12,7 +12,7 @@ import java.util.Properties;
  * @description: rocket 基础配置属性
  */
 @ConfigurationProperties(prefix = "rocket")
-public class RocketConfiguration {
+public class RocketProperties {
 
   private String secretKey = "secretKey";
 
@@ -22,7 +22,7 @@ public class RocketConfiguration {
 
   private String accessKey = "accessKey";
 
-  private Boolean enable = true;
+  private boolean enable = true;
 
   private Long delay = 5000L;
 
@@ -69,11 +69,11 @@ public class RocketConfiguration {
     this.accessKey = accessKey;
   }
 
-  public Boolean getEnable() {
+  public boolean getEnable() {
     return enable;
   }
 
-  public void setEnable(Boolean enable) {
+  public void setEnable(boolean enable) {
     this.enable = enable;
   }
 
