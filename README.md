@@ -15,13 +15,13 @@
        <dependency>
              <groupId>io.gitee.zhucan123</groupId>
              <artifactId>rocket-ons-spring-boot-starter</artifactId>
-             <version>1.0.1</version>
+             <version>1.0.2</version>
        </dependency>
 ```
 
 #### 使用说明
 
-###### 1. 项目配置
+#### 1. 项目加入配置
 
 ```text
 rocket:
@@ -33,28 +33,25 @@ rocket:
   delay: 1000
 ```
 
+###### 1.1 在主程序或配置类上面加上@EnableRocketONS来开启使用
+```java
+@EnableRocketONS
+public class App {
 
-###### 2. consumer的使用示例代码
+    public static void main(String[] args) {
+        SpringApplication.run(App.class, args);
+    }
+
+}
+```
+
+
+#### 2. consumer的使用示例代码
 
 ```java
-@Component
 @ConsumerListener(tags = "msg_tag", consumers = 2)
+@OnsConfiguration(topic = "topic-example", group = "group-example")
 public class ExampleConsumerListener implements RocketListener<MessageData> {
-
-  @Override
-  public String getTopic() {
-    return "topic-example";
-  }
-
-  @Override
-  public String getGroup() {
-    return "group-example";
-  }
-
-  @Override
-  public Boolean getEnable() {
-    return true;
-  }
 
   @Override
   public Action consume(Message message, MessageData messageBody, ConsumeContext consumeContext) {
@@ -64,8 +61,9 @@ public class ExampleConsumerListener implements RocketListener<MessageData> {
     return Action.CommitMessage;
   }
 }
+
 ```
- * @Component 注册成一个spring容器
+ * @OnsConfiguration 注册成一个spring容器,并设置消费者绑定的topic和group,可设置固定值,也可以使用${propertiesKey}的方式读取配置文件里面的配置
  * @ConsumerListener 标识这是一个ons的消息消费者监听器
       1. tags:接受带有相关tag的消息
       2. consumers启动的实例数量
@@ -74,32 +72,16 @@ public class ExampleConsumerListener implements RocketListener<MessageData> {
  * consume 为消费业务逻辑处理方法
  
  
-###### 3. 生产者的使用
+#### 3. 生产者的使用
 
 ```java
-@Component
+@OnsConfiguration(topic = "topic-example", group = "group-example")
 public class ExampleProducer extends DefaultProducerProxy {
 
-  @Override
-  public String getTopic() {
-    return "example-producer-topic";
-  }
-
-  @Override
-  public String getGroup() {
-    return "example-producer-group";
-  }
-
-  @Override
-  public Boolean getEnable() {
-    return true;
-  }
 }
 ```
- * @Component 注册成一个spring容器
+ * @OnsConfiguration 注册成一个spring容器,并设置生产者绑定的topic和group,可设置固定值,也可以使用${propertiesKey}的方式读取配置文件里面的配置
  * 继承通用的消息生产者基类, DefaultProducerProxy调用父类的sendMsg方法生产消息,并把消息投递到阿里云ONS服务
-  
- 
 
 #### 参与贡献
 
