@@ -42,8 +42,8 @@ secretKey	                |String	|是|-	        |您在阿里云账号管理控
 address    	                |String	|是|-	        |设置 TCP 协议接入点。
 groupSuffix	                |String	|否|GID_	    |您在控制台创建的 Group ID 的前缀一般以GID_头。
 topic	                    |String	|是|-         	|默认绑定的topic
-delay	                    |String	|否|64	        |消息发送延迟毫秒数
-enable	                    |String	|否|16	        |是非开启使用
+delay	                    |String	|否|1000	    |消息发送延迟毫秒数
+enable	                    |String	|否|true	    |是非开启使用
 
 > 最新配置及说明，详见阿里云官方文档：https://help.aliyun.com/document_detail/93574.html?spm=a2c4g.11186623.6.553.8185447dHy2atL
 
@@ -64,7 +64,7 @@ public class App {
 
 ```java
 @ConsumerListener(tags = "msg_tag", consumers = 2)
-@OnsConfiguration(topic = "topic-example", group = "group-example")
+@OnsConfiguration(topic = "topic-example", group = "GID_${example.group}")
 public class ExampleConsumerListener implements RocketListener<MessageData> {
 
   @Override
