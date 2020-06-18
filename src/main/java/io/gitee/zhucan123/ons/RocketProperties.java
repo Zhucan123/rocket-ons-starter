@@ -22,6 +22,8 @@ public class RocketProperties {
 
   private String accessKey = "accessKey";
 
+  private String groupSuffix = "GID_";
+
   private boolean enable = true;
 
   private Long delay = 5000L;
@@ -83,5 +85,17 @@ public class RocketProperties {
 
   public void setDelay(Long delay) {
     this.delay = delay;
+  }
+
+  public String getGroupSuffix() {
+    return groupSuffix;
+  }
+
+  public void setGroupSuffix(String groupSuffix) {
+    this.groupSuffix = groupSuffix;
+  }
+
+  public boolean isEnable() {
+    return enable;
   }
 }

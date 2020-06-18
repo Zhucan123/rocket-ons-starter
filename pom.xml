@@ -8,25 +8,28 @@
         <version>2.2.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>io.gitee.zhucan123</groupId>
     <artifactId>rocket-ons-spring-boot-starter</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.8</version>
+
     <name>rocket-ons-spring-boot-starter</name>
-    <description>Demo project for Spring Boot</description>
+    <description>SpringBoot Starter for AliYun Rocket ONS</description>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
+    <organization>
+        <name>WUHAN trayvon</name>
+        <url>http://zhucan123.gitee.io/</url>
+    </organization>
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.1.4.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -165,7 +168,42 @@
         <connection>scm:git@gitee.com:zhucan123/rocketONS-starter.git</connection>
         <developerConnection>scm:git@gitee.com:zhucan123/rocketONS-starter.git</developerConnection>
         <url>git@gitee.com:zhucan123/rocketONS-starter.git</url>
-        <tag>zc-rocket-ons-1.0.1</tag>
+        <tag>zc,rocket,ons,starter</tag>
     </scm>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <comments>Copyright 2014-2015 the original author or authors.
+
+                Licensed under the Apache License, Version 2.0 (the "License");
+                you may not use this file except in compliance with the License.
+                You may obtain a copy of the License at
+
+                https://www.apache.org/licenses/LICENSE-2.0
+
+                Unless required by applicable law or agreed to in writing, software
+                distributed under the License is distributed on an "AS IS" BASIS,
+                WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+                implied.
+
+                See the License for the specific language governing permissions and
+                limitations under the License.
+            </comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>1</id>
+            <email>zhucan714@163.com</email>
+            <name>zhuCan</name>
+            <roles>
+                <role>leader</role>
+                <role>develop</role>
+            </roles>
+        </developer>
+    </developers>
 
 </project>
