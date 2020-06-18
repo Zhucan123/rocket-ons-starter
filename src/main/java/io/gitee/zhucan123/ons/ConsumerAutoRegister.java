@@ -50,7 +50,7 @@ public class ConsumerAutoRegister {
         .forEach(x -> {
           ConsumerListener consumerListener = x.getClass().getAnnotation(ConsumerListener.class);
           OnsConfiguration config = x.getClass().getAnnotation(OnsConfiguration.class);
-          if ("on".equalsIgnoreCase(config.enable())) {
+          if ("on".equalsIgnoreCase(config.enable()) && configuration.getEnable()) {
             for (int i = 0; i < consumerListener.consumers(); i++) {
               rocketListeners.add(x);
             }
