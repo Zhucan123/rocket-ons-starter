@@ -15,7 +15,7 @@
        <dependency>
              <groupId>io.gitee.zhucan123</groupId>
              <artifactId>rocket-ons-spring-boot-starter</artifactId>
-             <version>1.0.2</version>
+             <version>1.0.8</version>
        </dependency>
 ```
 
@@ -29,6 +29,7 @@ rocket:
   secretKey: xxxx
   accessKey: xxxx
   topic: xxxx
+  groupSuffix: GID_
   enable: true
   delay: 1000
 ```
