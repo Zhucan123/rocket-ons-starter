@@ -81,7 +81,7 @@ public class ConsumerAutoRegister {
       // 获取注册注解
       ConsumerListener consumerListener = x.getClass().getAnnotation(ConsumerListener.class);
       OnsConfiguration config = x.getClass().getAnnotation(OnsConfiguration.class);
-      properties.put(PropertyKeyConst.GROUP_ID, propertyResolver.springElResolver(config.group()));
+      properties.put(PropertyKeyConst.GROUP_ID, configuration.getGroupSuffix() + propertyResolver.springElResolver(config.group()));
       properties.put(PropertyKeyConst.MessageModel, propertyResolver.springElResolver(consumerListener.pattern()));
       Consumer consumer = ONSFactory.createConsumer(properties);
       // 注册消费者监听器

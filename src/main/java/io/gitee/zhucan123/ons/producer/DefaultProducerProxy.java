@@ -41,7 +41,7 @@ public abstract class DefaultProducerProxy {
       return;
     }
     Properties properties = configuration.rocketProperties();
-    properties.put(PropertyKeyConst.GROUP_ID, propertyResolver.springElResolver(onsConfiguration().group()));
+    properties.put(PropertyKeyConst.GROUP_ID, configuration.getGroupSuffix() + propertyResolver.springElResolver(onsConfiguration().group()));
 
     producer = ONSFactory.createProducer(properties);
     logger.info("启动 producer :-> {}", properties.get(PropertyKeyConst.GROUP_ID));
