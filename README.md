@@ -34,6 +34,19 @@ rocket:
   delay: 1000
 ```
 
+
+参数名|类型|是否必填|默认值|描述
+---|---|---|---|---
+accessKey	                |String	|是|-	        |您在阿里云账号管理控制台中创建的 AccessKeyId，用于身份认证。
+secretKey	                |String	|是|-	        |您在阿里云账号管理控制台中创建的 AccessKeySecret，用于身份认证。
+address    	                |String	|是|-	        |设置 TCP 协议接入点。
+groupSuffix	                |String	|否|GID_	    |您在控制台创建的 Group ID 的前缀一般以GID_头。
+topic	                    |String	|是|-         	|默认绑定的topic
+delay	                    |String	|否|64	        |消息发送延迟毫秒数
+enable	                    |String	|否|16	        |是非开启使用
+
+> 最新配置及说明，详见阿里云官方文档：https://help.aliyun.com/document_detail/93574.html?spm=a2c4g.11186623.6.553.8185447dHy2atL
+
 ###### 1.1 在主程序或配置类上面加上@EnableRocketONS来开启使用
 ```java
 @EnableRocketONS
@@ -64,13 +77,13 @@ public class ExampleConsumerListener implements RocketListener<MessageData> {
 }
 
 ```
- * @OnsConfiguration 注册成一个spring容器,并设置消费者绑定的topic和group,可设置固定值,也可以使用${propertiesKey}的方式读取配置文件里面的配置
- * @ConsumerListener 标识这是一个ons的消息消费者监听器
+ * @OnsConfiguration : 注册成一个spring容器,并设置消费者绑定的topic和group,可设置固定值,也可以使用${propertiesKey}的方式读取配置文件里面的配置
+ * @ConsumerListener : 标识这是一个ons的消息消费者监听器
       1. tags:接受带有相关tag的消息
-      2. consumers启动的实例数量
+      2. consumers : 启动的实例数量
   
- * MessageData 为消息体类型class,可替换为继承至MessageData的类
- * consume 为消费业务逻辑处理方法
+ * MessageData : 为消息体类型class,可替换为任意java类
+ * consume : 为消费业务逻辑处理方法
  
  
 #### 3. 生产者的使用
@@ -81,7 +94,7 @@ public class ExampleProducer extends DefaultProducerProxy {
 
 }
 ```
- * @OnsConfiguration 注册成一个spring容器,并设置生产者绑定的topic和group,可设置固定值,也可以使用${propertiesKey}的方式读取配置文件里面的配置
+ * @OnsConfiguration : 注册成一个spring容器,并设置生产者绑定的topic和group,可设置固定值,也可以使用${propertiesKey}的方式读取配置文件里面的配置
  * 继承通用的消息生产者基类, DefaultProducerProxy调用父类的sendMsg方法生产消息,并把消息投递到阿里云ONS服务
 
 #### 参与贡献
