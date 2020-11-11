@@ -43,4 +43,14 @@ public class PropertyResolver {
     }
     return el;
   }
+
+  /**
+   * 使用spring自带的配置属性识别
+   *
+   * @param el el表达式
+   * @return 返回配置文件属性
+   */
+  public String resolvePlaceHolders(String el){
+    return environment.resolvePlaceholders(el);
+  }
 }

@@ -9,9 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 
 /**
@@ -20,7 +21,7 @@ import java.util.*;
  * @description: rocket 的消费者自动注册
  * 使用容器工厂扫描所有consumer, 并根据注解配置属性 subscribe到相应的队列
  */
-public class ConsumerAutoRegister {
+public class ConsumerAutoRegister implements ApplicationListener<WebServerInitializedEvent> {
 
   @Autowired
   private RocketProperties configuration;
@@ -37,7 +38,6 @@ public class ConsumerAutoRegister {
   /**
    * 用来注册consumer的
    */
-  @PostConstruct
   public void consumerListenerRegister() {
     AutowireCapableBeanFactory autowireCapableBeanFactory = applicationContext.getAutowireCapableBeanFactory();
     String[] beanNamesForAnnotation = applicationContext.getBeanNamesForAnnotation(ConsumerListener.class);
@@ -81,11 +81,11 @@ public class ConsumerAutoRegister {
       // 获取注册注解
       ConsumerListener consumerListener = x.getClass().getAnnotation(ConsumerListener.class);
       OnsConfiguration config = x.getClass().getAnnotation(OnsConfiguration.class);
-      properties.put(PropertyKeyConst.GROUP_ID, configuration.getGroupSuffix() + propertyResolver.springElResolver(config.group()));
-      properties.put(PropertyKeyConst.MessageModel, propertyResolver.springElResolver(consumerListener.pattern()));
+      properties.put(PropertyKeyConst.GROUP_ID, configuration.getGroupSuffix() + propertyResolver.resolvePlaceHolders(config.group()));
+      properties.put(PropertyKeyConst.MessageModel, propertyResolver.resolvePlaceHolders(consumerListener.pattern()));
       Consumer consumer = ONSFactory.createConsumer(properties);
       // 注册消费者监听器
-      consumer.subscribe(propertyResolver.springElResolver(config.topic()), String.join("||", consumerListener.tags()), x);
+      consumer.subscribe(propertyResolver.resolvePlaceHolders(config.topic()), String.join("||", consumerListener.tags()), x);
       // 启动消费者
       logger.info("启动消费者: {}", properties.get(PropertyKeyConst.GROUP_ID));
       consumer.start();
@@ -94,4 +94,8 @@ public class ConsumerAutoRegister {
 
   }
 
+  @Override
+  public void onApplicationEvent(WebServerInitializedEvent webServerInitializedEvent) {
+    consumerListenerRegister();
+  }
 }
