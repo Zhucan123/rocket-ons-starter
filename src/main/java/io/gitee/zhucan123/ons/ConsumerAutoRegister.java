@@ -13,7 +13,10 @@ import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * @author: zhuCan
@@ -58,14 +61,8 @@ public class ConsumerAutoRegister implements ApplicationListener<WebServerInitia
         });
 
 
-    // 启动一个定时器,延时加载,
-    new Timer().schedule(new TimerTask() {
-      @Override
-      public void run() {
-        listenerRegister(rocketListeners.toArray(new RocketListener[0]));
-      }
-    }, configuration.getDelay());
-
+    // 注册消费者, 并执行订阅
+    listenerRegister(rocketListeners.toArray(new RocketListener[0]));
 
   }
 
@@ -81,8 +78,10 @@ public class ConsumerAutoRegister implements ApplicationListener<WebServerInitia
       // 获取注册注解
       ConsumerListener consumerListener = x.getClass().getAnnotation(ConsumerListener.class);
       OnsConfiguration config = x.getClass().getAnnotation(OnsConfiguration.class);
+
       properties.put(PropertyKeyConst.GROUP_ID, configuration.getGroupSuffix() + propertyResolver.resolvePlaceHolders(config.group()));
       properties.put(PropertyKeyConst.MessageModel, propertyResolver.resolvePlaceHolders(consumerListener.pattern()));
+
       Consumer consumer = ONSFactory.createConsumer(properties);
       // 注册消费者监听器
       consumer.subscribe(propertyResolver.resolvePlaceHolders(config.topic()), String.join("||", consumerListener.tags()), x);
