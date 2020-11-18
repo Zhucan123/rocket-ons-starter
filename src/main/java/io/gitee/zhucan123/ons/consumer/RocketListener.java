@@ -32,7 +32,7 @@ public interface RocketListener<T> extends MessageListener {
     try {
       Type[] interfaces = getClass().getGenericInterfaces();
       for (Type anInterface : interfaces) {
-        if (anInterface.getTypeName().contains(io.gitee.zhucan123.ons.consumer.RocketListener.class.getTypeName())) {
+        if (anInterface.getTypeName().contains(RocketListener.class.getTypeName())) {
           Type[] actualTypeArguments = ((ParameterizedType) anInterface).getActualTypeArguments();
 
           if (actualTypeArguments != null && actualTypeArguments.length > 0) {
