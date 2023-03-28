@@ -1,6 +1,8 @@
 # rocketONS-starter
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 [![Gitee Stars](https://gitee.com/zc_oss/rocketONS-starter/badge/star.svg?theme=dark)](https://gitee.com/zc_oss/rocketONS-starter)
+[![Gitee fork](https://gitee.com/zc_oss/rocketONS-starter/badge/fork.svg?theme=dark)](https://gitee.com/zc_oss/rocketONS-starter)
+
 #### 介绍
 轻量级springBootStarter,基于阿里云ONS消息服务的一个简易封装,能快捷的创建rocketMQ的生产者和消费者,
 实现应用之间的消息传递.
