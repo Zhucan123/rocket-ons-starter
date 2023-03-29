@@ -22,7 +22,7 @@ rocketONS-starter 基于Spring的ApplicationContext容器管理，自动扫描co
 
 将以下依赖添加到您的项目中：
 
-```
+```xml
 
 <dependency>
     <groupId>io.gitee.zhucan123</groupId>
@@ -35,8 +35,7 @@ rocketONS-starter 基于Spring的ApplicationContext容器管理，自动扫描co
 
 ### 1. 将配置添加到项目中
 
-```
-yamlCopy code
+```yaml
 rocket:
   address: http://xxxx
   secretKey: xxxx
@@ -62,8 +61,7 @@ rocket:
 
 ### 2. 在主程序中启用rocketONS-starter
 
-```
-
+```java
 @EnableRocketONS
 public class App {
     public static void main(String[] args) {
@@ -74,8 +72,7 @@ public class App {
 
 ### 3. 示例代码：使用consumer
 
-```
-
+```java
 @ConsumerListener(tags = "msg_tag", consumers = 2)
 @OnsConfiguration(topic = "topic-example", group = "GID_${example.group}")
 public class ExampleConsumerListener implements RocketListener<MessageData> {
@@ -95,8 +92,7 @@ public class ExampleConsumerListener implements RocketListener<MessageData> {
 
 ### 4. 示例代码：使用producer
 
-```
-
+```java
 @Service
 public class ExampleProducerService {
     @Autowired
@@ -117,7 +113,6 @@ public class ExampleProducerService {
 使用RocketMQTemplate的syncSendOrderly方法发送顺序消息，确保消费者按照发送顺序进行消息处理。
 
 ```
-
 rocketMQTemplate.syncSendOrderly("topic-example:msg_tag", messageData, orderId);
 ```
 
@@ -126,7 +121,6 @@ rocketMQTemplate.syncSendOrderly("topic-example:msg_tag", messageData, orderId);
 在发送消息时，通过设置messageDelayLevel参数指定延时级别。
 
 ```
-
 rocketMQTemplate.syncSend("topic-example:msg_tag", messageData, messageDelayLevel);
 ```
 
@@ -134,8 +128,7 @@ rocketMQTemplate.syncSend("topic-example:msg_tag", messageData, messageDelayLeve
 
 使用@ConsumerListener注解的tags属性来实现消息过滤。设置对应的tag值，消费者将只会消费带有该tag的消息。
 
-```
-
+```java
 @ConsumerListener(tags = "msg_tag", consumers = 2)
 public class ExampleConsumerListener implements RocketListener<MessageData> { ... }
 ```
@@ -166,8 +159,7 @@ rocketMQTemplate.asyncSend("topic-example:msg_tag", messageData, new SendCallbac
 
 广播模式允许您将消息发送给所有消费者。要启用广播模式，需要在消费者监听器中设置broadcast属性为true。
 
-```
-javaCopy code
+```java
 @ConsumerListener(tags = "msg_tag", consumers = 2, broadcast = true)
 public class ExampleConsumerListener implements RocketListener<MessageData> { ... }
 ```
@@ -234,7 +226,7 @@ rocketMQTemplate.sendMessageInTransaction("topic-example:msg_tag", messageData, 
 
 为了方便集成测试，您可以使用 RocketMQTestListener 注解启动一个测试消费者。测试消费者会把收到的消息存储在内存中，以便测试时验证。
 
-```
+```java
 
 @RocketMQTestListener(topics = "topic-example", tags = "msg_tag")
 public class ExampleConsumerListener implements RocketListener<MessageData> { ... }
